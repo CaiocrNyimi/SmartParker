@@ -59,18 +59,18 @@ namespace SmartParker.Application.Services
             return dto;
         }
 
-        public async Task<bool> UpdateAsync(MotoDto dto)
+        public async Task<bool> UpdateAsync(long id, MotoUpdateDto dto)
         {
-            var existing = await _motoRepository.GetByIdAsync(dto.Id);
+            var existing = await _motoRepository.GetByIdAsync(id);
             if (existing == null) return false;
-
+        
             existing.Nome = dto.Nome;
             existing.Fabricante = dto.Fabricante;
             existing.Placa = dto.Placa;
             existing.QRCode = dto.QRCode;
             existing.Status = dto.Status;
             existing.UsuarioId = dto.UsuarioId;
-
+        
             await _motoRepository.UpdateAsync(existing);
             return true;
         }

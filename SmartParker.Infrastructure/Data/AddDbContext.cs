@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartParker.Domain.Entities;
-
 namespace SmartParker.Infrastructure.Data
 {
     public class SmartParkerDbContext : DbContext

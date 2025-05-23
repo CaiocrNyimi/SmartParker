@@ -1,14 +1,12 @@
-﻿namespace SmartParker.Domain.Entities
+namespace SmartParker.Application.DTOs
 {
-    public class Moto
+    public class MotoUpdateDto
     {
-        public long Id { get; set; }
         public string Nome { get; set; } = string.Empty;
         public string Fabricante { get; set; } = string.Empty;
         public string Placa { get; set; } = string.Empty;
         public string QRCode { get; set; } = string.Empty;
         public string Status { get; set; } = string.Empty;
         public long UsuarioId { get; set; }
-        public long? LocalizacaoId { get; set; }
     }
 }
