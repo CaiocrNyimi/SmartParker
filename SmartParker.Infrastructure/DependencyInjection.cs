@@ -14,10 +14,6 @@ namespace SmartParker.Infrastructure
                 options.UseOracle(connectionString));
 
             services.AddScoped<IMotoRepository, MotoRepository>();
-            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-            services.AddScoped<IPatioRepository, PatioRepository>();
-            services.AddScoped<ISetorRepository, SetorRepository>();
-            services.AddScoped<ILocalizacaoMotoRepository, LocalizacaoMotoRepository>();
 
             return services;
         }

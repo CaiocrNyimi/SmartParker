@@ -29,6 +29,13 @@ namespace SmartParker.API.Controllers
             return moto is null ? NotFound() : Ok(moto);
         }
 
+        [HttpGet("search")]
+        public async Task<IActionResult> GetByName([FromQuery] string nome)
+        {
+            var motos = await _motoService.SearchByNomeAsync(nome);
+            return Ok(motos);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create(MotoDto dto)
         {
@@ -37,11 +44,14 @@ namespace SmartParker.API.Controllers
         }
 
         [HttpPut("{id:long}")]
-        public async Task<IActionResult> Update(long id, MotoDto dto)
+        public async Task<IActionResult> Update(long id, MotoUpdateDto dto)
         {
-            if (id != dto.Id) return BadRequest();
-            var updated = await _motoService.UpdateAsync(dto);
-            return updated ? NoContent() : NotFound();
+            var updated = await _motoService.UpdateAsync(id, dto);
+            if (!updated)
+                return NotFound();
+
+            var moto = await _motoService.GetByIdAsync(id);
+            return Ok(moto);
         }
 
         [HttpDelete("{id:long}")]

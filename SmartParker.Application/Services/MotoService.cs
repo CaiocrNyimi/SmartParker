@@ -43,6 +43,21 @@ namespace SmartParker.Application.Services
             };
         }
 
+        public async Task<IEnumerable<MotoDto>> SearchByNomeAsync(string nome)
+        {
+            var motos = await _motoRepository.SearchByNomeAsync(nome);
+            return motos.Select(m => new MotoDto
+            {
+                Id = m.Id,
+                Nome = m.Nome,
+                Fabricante = m.Fabricante,
+                Placa = m.Placa,
+                QRCode = m.QRCode,
+                Status = m.Status,
+                UsuarioId = m.UsuarioId
+            });
+        }
+
         public async Task<MotoDto> CreateAsync(MotoDto dto)
         {
             var moto = new Moto
@@ -63,24 +78,22 @@ namespace SmartParker.Application.Services
         {
             var existing = await _motoRepository.GetByIdAsync(id);
             if (existing == null) return false;
-        
+
             existing.Nome = dto.Nome;
             existing.Fabricante = dto.Fabricante;
             existing.Placa = dto.Placa;
             existing.QRCode = dto.QRCode;
             existing.Status = dto.Status;
             existing.UsuarioId = dto.UsuarioId;
-        
-            await _motoRepository.UpdateAsync(existing);
-            return true;
+
+            return await _motoRepository.UpdateAsync(existing);
         }
 
         public async Task<bool> DeleteAsync(long id)
         {
             var existing = await _motoRepository.GetByIdAsync(id);
             if (existing == null) return false;
-            await _motoRepository.DeleteAsync(id);
-            return true;
+            return await _motoRepository.DeleteAsync(id);
         }
     }
 }

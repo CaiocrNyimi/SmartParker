@@ -9,6 +9,5 @@
         public string QRCode { get; set; } = string.Empty;
         public string Status { get; set; } = string.Empty;
         public long UsuarioId { get; set; }
-        public long? LocalizacaoId { get; set; }
     }
 }
